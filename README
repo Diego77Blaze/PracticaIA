@@ -2,3 +2,8 @@ Para lo de IA chavales
 
 MAKIGAS NUESTRO DIOS
 puto
+
+Ideas:
+· Una vez sacadas las funciones que comprueban fila columna y cuadrante, si las tres daan false para un numero, ese numero es una operación 
+válida. Hacer una función que itere de 1 a 9 y compruebe en cada iteración las operaciones válidas, las que sean válidas se devuelven en
+forma de lista, la longitud de esta lista sera el numero de sucesores del nodo.
