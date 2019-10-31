@@ -4,7 +4,7 @@
                 (7 8 9 3 1 2 4 5 6)
                 (4 5 6 1 2 3 7 8 9)))
 (define board                   
-  '((0 0 3 0 2 0 6 3 0)
+  '((0 0 3 0 2 0 6 0 0)
     (9 0 0 3 0 5 0 0 1)
     (0 0 1 8 0 6 4 0 0)
     (0 0 8 1 0 2 9 0 0)
@@ -28,43 +28,29 @@
 (define (sudokucorrecto sudoku)
   (for*/first ([i 4]
               [j 9]
-              #:when [(numberInListH sudoku( list-ref (list-ref sudoku i) j) (cdr(member ( list-ref (list-ref sudoku i) j) (list-ref sudoku i))) ) ]
+              #:when [(numberinlisth (list-ref (list-ref sudoku i) j) (car (list-ref sudoku i)) ) ]
               )
     (write i)
     )
   )
 
-(define (numberInListH number fila)
+(define (numberinlisth number fila)       
   (cond
-    [(equal? empty fila)(display "vacia")]
-    [(equal? #f (member number fila))#f]
-    [else fila]))
-    
-(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
-;(numberinlisth 8 primeralinea)
-(define (numberInListV sudoku number columna)
-  (for*/first ([i 9]
-              #:when [= number ( list-ref (list-ref sudoku i) columna)])
-    
-    (write i)
+    ([not(equal? '() fila)](numberinlisth number (car fila)))
+    (else (member number fila))
+        ;([not(equal? #f(member number (list-ref sudoku fila)))] (car (member number(list-ref sudoku fila))))
+        ;(else (member number (list-ref sudoku fila)))
       )
+  )
 
- )
-;(numberInListV board 1 0)
-
-
-(define(numberInListC number sudoku)
-  
-
- )
-;(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
+(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
 (define (findfirstzero sudoku)
   (for/first ([i 9]
     #:when [= (list-ref sudoku i) 0]) i))
 
 (define listaprueba empty)
 ;(findfirstzero primeralinea)
-;(sudokucorrecto board)
+(sudokucorrecto board)
 ;(display sudoku)
 
 (define lista '((0 0 3 0 2 0 6 0 0)
