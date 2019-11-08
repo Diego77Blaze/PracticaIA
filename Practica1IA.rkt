@@ -92,10 +92,11 @@
 (numberInListC 3 board 3 5)
 
 ;(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
-(define (findfirstzero sudoku)
+(define (firstZeroRow lista)
   (for/first ([i 9]
-    #:when [= (list-ref sudoku i) 0]) i))
+    #:when [= (list-ref lista i) 0]) i))
 
+(define (firstZero sudoku))
 (define listaprueba empty)
 ;(findfirstzero primeralinea)
 ;(sudokucorrecto board)
@@ -104,4 +105,12 @@
                 (9 0 0 3 0 5 0 0 1)))
 (define lista2 empty)
 ;(display (cons 15(cons (list-ref(list-ref lista 1) 3)empty)))
+
+|#Árbol de decision
+listas -----> sucesores
+              abiertos
+actual -----> if estado escogido de abiertos es estado meta then sudoku acabado
+              else sacar sucesores mediante los numeros posibles a aplicar a una posicion vacia
+#|
+
 
