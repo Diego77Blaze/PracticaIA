@@ -1,0 +1,10 @@
+Arbol de decision:
+Listas -----> Sucesores
+              Abiertos
+sucesores se obtiene utilizando el proximo cero del sudoku y las 
+comprobaciones de numeros posibles en esa posicion.
+
+sucesores obtenidos se añaden a la lista de abiertos
+
+estado meta se comprueba cuando para obtener sucesores no hay ninguna 
+posicion vacia.
