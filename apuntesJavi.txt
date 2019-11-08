@@ -1,4 +1,5 @@
 Arbol de decision:
+
 Listas -----> Sucesores
               Abiertos
 sucesores se obtiene utilizando el proximo cero del sudoku y las 
