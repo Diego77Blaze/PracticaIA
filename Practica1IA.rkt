@@ -96,7 +96,11 @@
   (for/first ([i 9]
     #:when [= (list-ref lista i) 0]) i))
 
-(define (firstZero sudoku))
+(define (firstZero sudoku)
+  (for*/first ([i 8]
+               [j 8]
+               #:when (= (list-ref (list-ref sudoku i)j)0))(list i j)))
+
 (define listaprueba empty)
 ;(findfirstzero primeralinea)
 ;(sudokucorrecto board)
