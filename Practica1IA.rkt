@@ -16,14 +16,14 @@
 
 ;(list-ref '(a b c) 2) 
 (define (printLista lista)
-(for* ([i 4]
+(for* ([i 9]
        [j 9])
   (cond
     ([= j 0](display "|")(write (list-ref (list-ref lista i) j)))
     ([= j 8](write (list-ref (list-ref lista i) j))(display "|\n"))
     (else (write (list-ref (list-ref lista i) j)))))
 )
-(printLista sudoku)
+(printLista board)
 
 (define (sudokucorrecto sudoku)
   (for*/first ([i 4]
@@ -36,27 +36,61 @@
 
 (define (numberInListH number fila)
   (cond
-    [(equal? empty fila)(display "vacia")]
+    ;[(equal? empty fila)(#t)]
     [(equal? #f (member number fila))#f]
-    [else fila]))
+    [else #t]))
     
 (define primeralinea '(1 2 3 4 5 6 0 8 9)) 
-;(numberinlisth 8 primeralinea)
+;(numberInListH 7 primeralinea)
 (define (numberInListV sudoku number columna)
-  (for*/first ([i 9]
-              #:when [= number ( list-ref (list-ref sudoku i) columna)])
-    
-    (write i)
+  (for*/first ([i 8]
+              #:when [= number ( list-ref (list-ref sudoku i) columna)])    
+    #t
       )
 
  )
-;(numberInListV board 1 0)
+;(numberInListV board 8 8)
 
 
-(define(numberInListC number sudoku)
-  
+(define(numberInListC number sudoku posicionx posiciony)
+  (cond
+    [(> 3 posicionx)
+     (cond
+       [(> 3 posiciony)1]
+       [(and (< 3 posiciony)(> 6 posiciony))2]
+       [(< 6 posiciony)3])
+    ]
+    [(and (< 2 posicionx)(> 6 posicionx))
+     (cond
+       [(> 3 posiciony)4]
+       [(and (< 3 posiciony)(> 6 posiciony))5]
+       [(< 6 posiciony)6])
+     
+     ]
+    [(< 6 posicionx)
+     (cond
+       [(> 3 posiciony)7]
+       [(and (< 3 posiciony)(> 6 posiciony))8]
+       [(< 6 posiciony)9])
+     ]
 
- )
+   )
+)
+(define(crearCuadrante numeroCuadrante sudoku)
+  (cond
+    [(= numeroCuadrante 1)(filter (for ([i 8][j 3]) (cond [(( list-ref (list-ref sudoku i) j))]) ))]
+    [(= numeroCuadrante 2)]
+    [(= numeroCuadrante 3)]
+    [(= numeroCuadrante 4)]
+    [(= numeroCuadrante 5)]
+    [(= numeroCuadrante 6)]
+    [(= numeroCuadrante 7)]
+    [(= numeroCuadrante 8)]
+    [(= numeroCuadrante 9)]
+    )
+  )
+(numberInListC 3 board 3 5)
+
 ;(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
 (define (findfirstzero sudoku)
   (for/first ([i 9]
@@ -65,8 +99,7 @@
 (define listaprueba empty)
 ;(findfirstzero primeralinea)
 ;(sudokucorrecto board)
-;(display sudoku)
-
+;(display sudoku)'
 (define lista '((0 0 3 0 2 0 6 0 0)
                 (9 0 0 3 0 5 0 0 1)))
 (define lista2 empty)
