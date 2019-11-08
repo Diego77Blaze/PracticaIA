@@ -78,7 +78,7 @@
 )
 (define(crearCuadrante numeroCuadrante sudoku)
   (cond
-    [(= numeroCuadrante 1)]
+    [(= numeroCuadrante 1)(filter (for ([i 8][j 3]) (cond [(( list-ref (list-ref sudoku i) j))]) ))]
     [(= numeroCuadrante 2)]
     [(= numeroCuadrante 3)]
     [(= numeroCuadrante 4)]
@@ -89,17 +89,14 @@
     [(= numeroCuadrante 9)]
     )
   )
-(define(listaConstruir sudoku columna)(cond [(> columna -1) (cons (listaConstruir sudoku (- columna 1)) (list-ref sudoku columna))]))
-(cdr(car(listaConstruir board 2)))
-(listaConstruir board 2)
-;(numberInListC 3 board 3 5)
+(numberInListC 3 board 3 5)
 
 ;(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
 (define (firstZeroRow lista)
   (for/first ([i 9]
     #:when [= (list-ref lista i) 0]) i))
 
-;(define (firstZero sudoku))
+(define (firstZero sudoku))
 (define listaprueba empty)
 ;(findfirstzero primeralinea)
 ;(sudokucorrecto board)
@@ -109,11 +106,11 @@
 (define lista2 empty)
 ;(display (cons 15(cons (list-ref(list-ref lista 1) 3)empty)))
 
-#|Árbol de decision
+|#Árbol de decision
 listas -----> sucesores
               abiertos
 actual -----> if estado escogido de abiertos es estado meta then sudoku acabado
               else sacar sucesores mediante los numeros posibles a aplicar a una posicion vacia
-|#
+#|
 
 
