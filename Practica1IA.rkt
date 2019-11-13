@@ -193,11 +193,14 @@
 (define lista2 empty)
 ;(display (cons 15(cons (list-ref(list-ref lista 1) 3)empty)))
 
+<<<<<<< HEAD
 #|Árbol de decision
 listas -----> sucesores
               abiertos
 actual -----> if estado escogido de abiertos es estado meta then sudoku acabado
               else sacar sucesores mediante los numeros posibles a aplicar a una posicion vacia
 |#
+=======
+>>>>>>> master
 
 
