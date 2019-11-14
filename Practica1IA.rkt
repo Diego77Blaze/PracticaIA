@@ -101,7 +101,25 @@
                [j 8]
                #:when (= (list-ref (list-ref sudoku i)j)0))(list i j)))
 
-(define listaprueba empty)
+(define (validNumber? numero posicion sudoku)
+  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))))
+;---------------------------------------------------------------
+;------------------------------------------------------------
+#|(define (getSucesores sudoku)
+  (cond
+    [(empty? (firstZero sudoku))#f]
+    [else (for ([i (in-range 1 9)]
+                (if(validNumber? i (firstZero sudoku) sudoku)(list i '()))))]))
+|#
+(define (reemplazarCero numero posicion sudoku)
+  (printLista(reemplazarElementoLista (reemplazarElementoLista numero (cadr posicion) (list-ref sudoku (car posicion)))(car posicion)sudoku)))
+
+(define (reemplazarElementoLista elemento indice lista)
+  (cond
+    [(equal? 0 indice) (cons elemento (cdr lista))]
+    [else (cons (car lista)(reemplazarElementoLista elemento (- indice 1) (cdr lista)))]))
+
+
 ;(findfirstzero primeralinea)
 ;(sudokucorrecto board)
 ;(display sudoku)'
