@@ -119,7 +119,7 @@
     [(equal? 0 indice) (cons elemento (cdr lista))]
     [else (cons (car lista)(reemplazarElementoLista elemento (- indice 1) (cdr lista)))]))
 
-
+;sdaads
 ;(findfirstzero primeralinea)
 ;(sudokucorrecto board)
 ;(display sudoku)'
