@@ -194,14 +194,9 @@
   (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
-#|(define (getSucesores sudoku)
-  (cond
-    [(empty? (firstZero sudoku))#f]
-    [else (for ([i (in-range 1 9)]
-                (if(validNumber? i (firstZero sudoku) sudoku)(list i '()))))]))
-|#
+
 (define (reemplazarCero numero posicion sudoku)
-  (printLista(reemplazarElementoLista (reemplazarElementoLista numero (cadr posicion) (list-ref sudoku (car posicion)))(car posicion)sudoku)))
+  (reemplazarElementoLista (reemplazarElementoLista numero (cadr posicion) (list-ref sudoku (car posicion)))(car posicion)sudoku))
 
 (define (reemplazarElementoLista elemento indice lista)
   (cond
@@ -209,13 +204,17 @@
     [else (cons (car lista)(reemplazarElementoLista elemento (- indice 1) (cdr lista)))]))
 
 
-;(findfirstzero primeralinea)
-;(sudokucorrecto board)
-;(display sudoku)'
-(define lista '((0 0 3 0 2 0 6 0 0)
-                (9 0 0 3 0 5 0 0 1)))
-(define lista2 empty)
-;(display (cons 15(cons (list-ref(list-ref lista 1) 3)empty)))
+(define (push elemento pila)
+  (cons elemento pila))
+(define (pop pila)(car pila))
 
 
+(define (goalTest sudoku)
+  (cond
+    []))
+
+
+
+(define (resolverSudoku sudoku)
+  )
 
