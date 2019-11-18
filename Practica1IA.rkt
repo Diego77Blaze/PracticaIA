@@ -216,6 +216,14 @@
     [(numeroValido? iteracion posicion sudoku)(getOperacionesValidas (- iteracion 1) posicion sudoku (cons iteracion lista))]
     [else (getOperacionesValidas (- iteracion 1) posicion sudoku lista)]))
 
+
+(define (apilarSucesores numerosValidos posicion sudoku pila)
+  (cond
+    [(empty? numerosValidos)pila]
+    [else (apilarSucesores (cdr numerosValidos) posicion sudoku (push(reemplazarCero (car numerosValidos)posicion sudoku) pila))]))
+
+
+
 (define (goalTest sudoku)
   (cond
     [(list? (firstZero sudoku)) #f]
