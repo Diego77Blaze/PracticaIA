@@ -191,8 +191,8 @@
                #:when (= (list-ref (list-ref sudoku i)j)0))(list i j)))
 
 
-(define (validNumber? numero posicion sudoku)
-  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))))
+(define (numeroValido? numero posicion sudoku)
+  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (car posicion)(cadr posicion))))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
 
@@ -210,12 +210,19 @@
 (define (pop pila)(car pila))
 
 
+(define (getOperacionesValidas iteracion posicion sudoku lista)
+  (cond
+    [(equal? 0 iteracion) lista]
+    [(numeroValido? iteracion posicion sudoku)(getOperacionesValidas (- iteracion 1) posicion sudoku (cons iteracion lista))]
+    [else (getOperacionesValidas (- iteracion 1) posicion sudoku lista)]))
+
 (define (goalTest sudoku)
   (cond
-    []))
+    [(list? (firstZero sudoku)) #f]
+    [else #t]))
 
 
 
 (define (resolverSudoku sudoku)
-  )
+  #t)
 
