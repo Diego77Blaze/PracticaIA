@@ -52,10 +52,30 @@
 ;(numberInListV board 8 8)
 
 
-(define(listaConstruir3PrimerasFilas sudoku columna)(cond [(< columna 3) (cons (list-ref sudoku columna) (listaConstruir3PrimerasFilas sudoku (+ columna 1)) )]))
-(define(listaConstruir3FilasDelMedio sudoku columna)(cond [(< columna 6) (cons (list-ref sudoku columna) (listaConstruir3FilasDelMedio sudoku (+ columna 1)) )]))
-(define(listaConstruir3UltimasFilas sudoku columna)(cond [(< columna 9) (cons (list-ref sudoku columna) (listaConstruir3UltimasFilas sudoku (+ columna 1)) )]))
+(define(numberInListC number sudoku posicionx posiciony)
+  (cond
+    [(> 3 posicionx)
+     (cond
+       [(> 3 posiciony)(equal? #f (member number (construirCuadrante 1 board)) #f) #t]
+       [(and (< 3 posiciony)(> 6 posiciony))2]
+       [(< 6 posiciony)3])
+    ]
+    [(and (< 2 posicionx)(> 6 posicionx))
+     (cond
+       [(> 3 posiciony)4]
+       [(and (< 3 posiciony)(> 6 posiciony))5]
+       [(< 6 posiciony)6])
+     
+     ]
+    [(< 6 posicionx)
+     (cond
+       [(> 3 posiciony)7]
+       [(and (< 3 posiciony)(> 6 posiciony))8]
+       [(< 6 posiciony)9])
+     ]
 
+   )
+)
 
 (define(construirCuadrante numeroCuadrante board)
   (cond
@@ -150,32 +170,11 @@
                                 (list-ref (car(listaConstruir3UltimasFilas board 8))8))]
     )
   )
-(define(numberInListC number sudoku posicionx posiciony)
-  (cond
-    [(> 3 posiciony)
-     (cond
-       [(> 3 posicionx) (if(equal? #f (member number (construirCuadrante 1 board))) #f #t)]
-       [(and (< 3 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 2 board))) #f #t)]
-       [(< 6 posicionx)(if(equal? #f (member number (construirCuadrante 3 board))) #f #t)])
-    ]
-    [(and (< 2 posicionx)(> 6 posiciony))
-     (cond
-       [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 4 board))) #f #t)]
-       [(and (< 3 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 5 board))) #f #t)]
-       [(< 6 posicionx)(if(equal? #f (member number (construirCuadrante 6 board))) #f #t)])
-     
-     ]
-    [(< 6 posiciony)
-     (cond
-       [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 7 board))) #f #t)]
-       [(and (< 3 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 8 board))) #f #t)]
-       [(< 6 posicionx)(if(equal? #f (member number (construirCuadrante 9 board))) #f #t)])
-     ]
-
-   )
-)
+(define(listaConstruir3PrimerasFilas sudoku columna)(cond [(< columna 3) (cons (list-ref sudoku columna) (listaConstruir3PrimerasFilas sudoku (+ columna 1)) )]))
+(define(listaConstruir3FilasDelMedio sudoku columna)(cond [(< columna 6) (cons (list-ref sudoku columna) (listaConstruir3FilasDelMedio sudoku (+ columna 1)) )]))
+(define(listaConstruir3UltimasFilas sudoku columna)(cond [(< columna 9) (cons (list-ref sudoku columna) (listaConstruir3UltimasFilas sudoku (+ columna 1)) )]))
 ;(numberInListC 3 board 3 5)
-;(construirCuadrante 5 board)
+(construirCuadrante 5 board)
 ;(listaConstruir3FilasDelMedio board 3)
 ;(listaConstruir3UltimasFilas board 6)
 ;(construirPrimerCuadrante board)
