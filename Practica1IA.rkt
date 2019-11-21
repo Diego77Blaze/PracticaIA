@@ -4,15 +4,15 @@
                 (7 8 9 3 1 2 4 5 6)
                 (4 5 6 1 2 3 7 8 9)))
 (define board                   
-  '((0 0 3 0 2 0 6 3 0)
-    (9 0 0 3 0 5 0 0 1)
-    (0 0 1 8 0 6 4 0 0)
-    (0 0 8 1 0 2 9 0 0)
-    (7 0 0 0 0 0 0 0 8)
-    (0 0 6 7 0 8 2 0 0)
-    (0 0 2 6 0 9 5 0 0)
-    (8 0 0 2 0 3 0 0 9)
-    (0 0 5 0 1 0 3 0 0)))
+  '((5 6 7 0 0 0 0 0 0)
+    (0 2 8 4 0 0 5 0 3)
+    (1 0 0 2 7 0 0 0 6)
+    (0 0 3 0 5 2 1 9 0)
+    (7 0 6 0 1 0 2 0 8)
+    (0 1 9 7 4 0 3 0 0)
+    (6 0 0 0 9 4 0 0 2)
+    (8 0 1 0 0 6 7 5 0)
+    (0 0 0 0 0 0 0 0 4)))
 
 ;(list-ref '(a b c) 2) 
 (define (printLista lista)
@@ -192,7 +192,7 @@
 
 
 (define (numeroValido? numero posicion sudoku)
-  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (car posicion)(cadr posicion))))
+  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (cadr posicion)(car posicion))))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
 
@@ -231,8 +231,7 @@
 
 
 
-(define (resolverSudoku sudoku)
-  #t)
+
 ;-------------------------------
 ;-------------------------------
 
@@ -266,4 +265,11 @@
   (visualizar3Filas (listaConstruir3UltimasFilas sudoku 6))
   )
 (visualizarSudoku board)
+
+(define (resolverSudoku sudoku abiertos)
+  (cond
+    [(goalTest sudoku)(printLista sudoku)]
+    [else (resolverSudoku (pop(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
+                          (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos)))]))
+
 
