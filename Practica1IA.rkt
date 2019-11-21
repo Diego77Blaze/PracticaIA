@@ -233,4 +233,37 @@
 
 (define (resolverSudoku sudoku)
   #t)
+;-------------------------------
+;-------------------------------
+
+(define (visualizar3Filas sudoku)
+  (for*
+      [(i 4)(j 24)]
+    (cond
+      [(= i 3)(cond
+                [(= j 7)(display "+")]
+                [(= j 15)(display "+")]
+                [(= j 23)(display "\n")]
+                [else (display "-")]
+                )
+      ]
+      
+      [(< j 9)(cond
+                 [(= 3 j)(display " | ")(write (list-ref (list-ref sudoku i) j))]
+                 [(= 6 j)(display " | ")(write (list-ref (list-ref sudoku i) j))]                
+                 [(= j 8)(display " ")(write (list-ref (list-ref sudoku i) j)) (display "\n")]
+                 [else (display " ")(write (list-ref (list-ref sudoku i) j))]
+      )]
+    
+    )
+    
+  )
+)
+(define (visualizarSudoku sudoku)
+  (display "-------+-------+-------\n")
+  (visualizar3Filas (listaConstruir3PrimerasFilas sudoku 0))
+  (visualizar3Filas (listaConstruir3FilasDelMedio sudoku 3))
+  (visualizar3Filas (listaConstruir3UltimasFilas sudoku 6))
+  )
+(visualizarSudoku board)
 
