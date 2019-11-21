@@ -186,8 +186,8 @@
 
 
 (define (firstZero sudoku)
-  (for*/first ([i 8]
-               [j 8]
+  (for*/first ([i 9]
+               [j 9]
                #:when (= (list-ref (list-ref sudoku i)j)0))(list i j)))
 
 
