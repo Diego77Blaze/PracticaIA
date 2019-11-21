@@ -4,7 +4,7 @@
                 (7 8 9 3 1 2 4 5 6)
                 (4 5 6 1 2 3 7 8 9)))
 (define board                   
-  '((5 6 7 0 0 0 0 0 0)
+  '((5 0 0 0 0 0 0 0 0)
     (0 2 8 4 0 0 5 0 3)
     (1 0 0 2 7 0 0 0 6)
     (0 0 3 0 5 2 1 9 0)
@@ -23,7 +23,6 @@
     ([= j 8](write (list-ref (list-ref lista i) j))(display "|\n"))
     (else (write (list-ref (list-ref lista i) j)))))
 )
-(printLista board)
 
 (define (sudokucorrecto sudoku)
   (for*/first ([i 4]
@@ -174,7 +173,7 @@
 
    )
 )
-(numberInListC 8 board 3 0)
+;(numberInListC 8 board 3 0)
 ;(construirCuadrante 5 board)
 ;(listaConstruir3FilasDelMedio board 3)
 ;(listaConstruir3UltimasFilas board 6)
@@ -192,7 +191,7 @@
 
 
 (define (numeroValido? numero posicion sudoku)
-  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (cadr posicion)(car posicion))))
+  (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (car posicion)(cadr posicion))))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
 
@@ -268,7 +267,7 @@
 
 (define (resolverSudoku sudoku abiertos)
   (cond
-    [(goalTest sudoku)(printLista sudoku)]
+    [(goalTest sudoku)(visualizarSudoku sudoku)]
     [else (resolverSudoku (pop(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
                           (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos)))]))
 
