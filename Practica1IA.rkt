@@ -271,4 +271,43 @@
     [else (resolverSudoku (pop(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
                           (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos)))]))
 
+;---------------------------------------------------------------
+;------------------------------------------------------------
+(define prueba                   
+  '((0 4 7 0 5 3 0 6 2)
+    (3 1 5 6 4 0 0 0 0)
+    (0 6 8 0 7 0 5 0 3)
+    (7 5 0 0 0 0 8 0 9)
+    (6 0 0 0 0 0 4 3 0)
+    (0 8 3 0 2 0 0 0 5)
+    (0 0 0 0 0 0 2 8 0)
+    (0 0 6 0 8 5 7 0 4)
+    (0 2 0 0 0 4 0 5 0)))
+
+(define solprueba                   
+  '((9 4 7 8 5 3 1 6 2)
+    (3 1 5 6 4 2 9 7 8)
+    (2 6 8 1 7 9 5 4 3)
+    (7 5 1 4 3 6 8 2 9)
+    (6 9 2 5 1 8 4 3 7)
+    (4 8 3 9 2 7 6 1 5)
+    (5 7 4 3 9 1 2 8 6)
+    (1 3 6 2 8 5 7 9 4)
+    (8 2 9 7 6 4 3 5 1)))
+
+(define (backtracking sudInicial sudFinal)
+  (reemplazarElementoLista (reemplazarElementoLista (list-ref (list-ref sudFinal (car(firstZero sudInicial))) (cadr(firstZero sudInicial))) (cadr(firstZero sudInicial)) (list-ref sudInicial (car(firstZero sudInicial)))) (car(firstZero sudInicial)) sudInicial)
+  )
+
+(define (pasosSolucion sudInicial sudFinal)
+  (cond
+    [(equal? #f (equal? sudInicial sudFinal))
+     (visualizarSudoku (backtracking sudInicial sudFinal))
+     (display "\n")
+     (pasosSolucion (backtracking sudInicial sudFinal) sudFinal)]
+    )
+  )
+
+
+
 
