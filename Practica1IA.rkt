@@ -150,7 +150,7 @@
                                 (list-ref (car(listaConstruir3UltimasFilas board 8))8))]
     )
   )
-(define(numberInListC number sudoku posicionx posiciony)
+(define(numberInListC number sudoku posiciony posicionx)
   (cond
     [(> 3 posiciony)
      (cond
@@ -158,7 +158,7 @@
        [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 2 board))) #f #t)]
        [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 3 board))) #f #t)])
     ]
-    [(and (< 2 posicionx)(> 6 posiciony))
+    [(and (< 2 posiciony)(> 6 posiciony))
      (cond
        [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 4 board))) #f #t)]
        [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 5 board))) #f #t)]
@@ -174,7 +174,7 @@
 
    )
 )
-(numberInListC 3 board 10 10)
+(numberInListC 8 board 3 0)
 ;(construirCuadrante 5 board)
 ;(listaConstruir3FilasDelMedio board 3)
 ;(listaConstruir3UltimasFilas board 6)
