@@ -153,22 +153,22 @@
   (cond
     [(> 3 posiciony)
      (cond
-       [(> 3 posicionx) (if(equal? #f (member number (construirCuadrante 1 board))) #f #t)]
-       [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 2 board))) #f #t)]
-       [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 3 board))) #f #t)])
+       [(> 3 posicionx) (if(equal? #f (member number (construirCuadrante 1 sudoku))) #f #t)]
+       [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 2 sudoku))) #f #t)]
+       [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 3 sudoku))) #f #t)])
     ]
     [(and (< 2 posiciony)(> 6 posiciony))
      (cond
-       [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 4 board))) #f #t)]
-       [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 5 board))) #f #t)]
-       [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 6 board))) #f #t)])
+       [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 4 sudoku))) #f #t)]
+       [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 5 sudoku))) #f #t)]
+       [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 6 sudoku))) #f #t)])
      
      ]
     [(< 5 posiciony)
      (cond
-       [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 7 board))) #f #t)]
-       [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 8 board))) #f #t)]
-       [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 9 board))) #f #t)])
+       [(> 3 posicionx)(if(equal? #f (member number (construirCuadrante 7 sudoku))) #f #t)]
+       [(and (< 2 posicionx)(> 6 posicionx))(if(equal? #f (member number (construirCuadrante 8 sudoku))) #f #t)]
+       [(< 5 posicionx)(if(equal? #f (member number (construirCuadrante 9 sudoku))) #f #t)])
      ]
 
    )
