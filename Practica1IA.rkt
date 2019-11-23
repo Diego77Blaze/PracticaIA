@@ -173,6 +173,13 @@
 
    )
 )
+
+(define (pruebaC sudoku)
+  (for* ([i 9]
+         [j 9])
+    (for ([k 9])
+      (fprintf (current-output-port)"eje y: ~a eje x: ~a numero a comprobar: ~a :~a "i j k (numberInListC k sudoku i j))
+      (writeln""))))
 ;(numberInListC 8 board 3 0)
 ;(construirCuadrante 5 board)
 ;(listaConstruir3FilasDelMedio board 3)
@@ -208,6 +215,14 @@
   (cons elemento pila))
 (define (pop pila)(car pila))
 
+(define (encolar elemento cola)
+  (cons elemento cola))
+
+(define (obtenerPrimeroCola cola)
+  (last cola))
+
+(define (desencolar cola)
+  (reverse(cdr (reverse cola))))
 
 (define (getOperacionesValidas iteracion posicion sudoku lista)
   (cond
@@ -221,6 +236,10 @@
     [(empty? numerosValidos)pila]
     [else (apilarSucesores (cdr numerosValidos) posicion sudoku (push(reemplazarCero (car numerosValidos)posicion sudoku) pila))]))
 
+(define (encolarSucesores numerosValidos posicion sudoku cola)
+  (cond
+    [(empty? numerosValidos)cola]
+    [else (encolarSucesores (cdr numerosValidos) posicion sudoku (encolar(reemplazarCero(car numerosValidos)posicion sudoku) cola))]))
 
 
 (define (goalTest sudoku)
@@ -265,16 +284,22 @@
   )
 (visualizarSudoku board)
 
-(define (resolverSudoku sudoku abiertos)
+(define (resolverSudokuDFS sudoku abiertos backtracking)
   (cond
-    [(goalTest sudoku)(visualizarSudoku sudoku)]
-    [else (resolverSudoku (pop(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
-                          (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos)))]))
+    [(goalTest sudoku)(if backtracking (pasosSolucion board sudoku)(visualizarSudoku sudoku))]
+    [else (resolverSudokuDFS (pop(apilarSucesores(getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
+                          (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))backtracking)]))
 
+
+(define (resolverSudokuBFS sudoku abiertos backtracking)
+  (cond
+    [(goalTest sudoku)(if backtracking (pasosSolucion board sudoku)(visualizarSudoku sudoku))]
+    [else (resolverSudokuBFS (obtenerPrimeroCola(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
+                             (desencolar(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))backtracking)]))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
 (define prueba                   
-  '((0 4 7 0 5 3 0 6 2)
+  '((9 4 7 8 5 3 1 6 2)
     (3 1 5 6 4 0 0 0 0)
     (0 6 8 0 7 0 5 0 3)
     (7 5 0 0 0 0 8 0 9)
@@ -308,6 +333,14 @@
     )
   )
 
-
+(define error '((9 4 7 1 5 3 0 6 2)
+                (3 1 5 6 4 0 0 0 0)
+                (0 6 8 0 7 0 5 0 3)
+                (7 5 0 0 0 0 8 0 9)
+                (6 0 0 0 0 0 4 3 0)
+                (0 8 3 0 2 0 0 0 5)
+                (0 0 0 0 0 0 2 8 0)
+                (0 0 6 0 8 5 7 0 4)
+                (0 2 0 0 0 4 0 5 0)))
 
 
