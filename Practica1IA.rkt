@@ -324,12 +324,32 @@
   (reemplazarElementoLista (reemplazarElementoLista (list-ref (list-ref sudFinal (car(firstZero sudInicial))) (cadr(firstZero sudInicial))) (cadr(firstZero sudInicial)) (list-ref sudInicial (car(firstZero sudInicial)))) (car(firstZero sudInicial)) sudInicial)
   )
 
+#|(define (backtracking sudInicial sudFinal)
+  (cond
+    [(equal? #f (firstZero sudInicial))]
+    [else (reemplazarElementoLista (reemplazarElementoLista (list-ref (list-ref sudFinal (car(firstZero sudInicial))) (cadr(firstZero sudInicial))) (cadr(firstZero sudInicial)) (list-ref sudInicial (car(firstZero sudInicial)))) (car(firstZero sudInicial)) sudInicial)] 
+    ))
+
 (define (pasosSolucion sudInicial sudFinal)
   (cond
     [(equal? #f (equal? sudInicial sudFinal))
      (visualizarSudoku (backtracking sudInicial sudFinal))
      (display "\n")
      (pasosSolucion (backtracking sudInicial sudFinal) sudFinal)]
+    )
+  )
+|#
+
+(define (pasosSolucion sudInicial sudFinal)
+  (cond
+    [(equal? #f (equal? sudInicial sudFinal))
+     (cond
+       [(pair? (firstZero sudInicial))
+        (visualizarSudoku (backtracking sudInicial sudFinal))
+        (display "\n")
+        (pasosSolucion (backtracking sudInicial sudFinal) sudFinal)]
+       )
+     ]
     )
   )
 (define test1
