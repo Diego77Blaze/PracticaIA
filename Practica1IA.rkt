@@ -284,17 +284,17 @@
   )
 (visualizarSudoku board)
 
-(define (resolverSudokuDFS sudoku abiertos backtracking)
+(define (resolverSudokuDFS sudokuInicial sudoku abiertos backtracking)
   (cond
-    [(goalTest sudoku)(if backtracking (pasosSolucion board sudoku)(visualizarSudoku sudoku))]
-    [else (resolverSudokuDFS (pop(apilarSucesores(getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
+    [(goalTest sudoku)(if backtracking (pasosSolucion sudokuInicial sudoku)(visualizarSudoku sudoku))]
+    [else (resolverSudokuDFS sudokuInicial(pop(apilarSucesores(getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
                           (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))backtracking)]))
 
 
-(define (resolverSudokuBFS sudoku abiertos backtracking)
+(define (resolverSudokuBFS sudokuInicial sudoku abiertos backtracking)
   (cond
-    [(goalTest sudoku)(if backtracking (pasosSolucion board sudoku)(visualizarSudoku sudoku))]
-    [else (resolverSudokuBFS (obtenerPrimeroCola(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
+    [(goalTest sudoku)(if backtracking (pasosSolucion sudokuInicial sudoku)(visualizarSudoku sudoku))]
+    [else (resolverSudokuBFS sudokuInicial(obtenerPrimeroCola(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
                              (desencolar(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))backtracking)]))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
