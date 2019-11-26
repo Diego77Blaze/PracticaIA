@@ -42,7 +42,7 @@
 (define primeralinea '(1 2 3 4 5 6 0 8 9)) 
 ;(numberInListH 7 primeralinea)
 (define (numberInListV sudoku number columna)
-  (for*/first ([i 8]
+  (for*/first ([i 9]
               #:when [= number ( list-ref (list-ref sudoku i) columna)])    
     #t
       )
