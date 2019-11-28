@@ -33,14 +33,27 @@
     )
   )
 
+
+#|
+Parametros: numero lista(fila de sudoku)
+Descripcion: La funcion comprueba si el numero dado esta dentro de la lista dada
+Retorno: true -> numero esta en lista
+         false -> numero no esta en lista
+|#
 (define (numberInListH number fila)
   (cond
     ;[(equal? empty fila)(#t)]
     [(equal? #f (member number fila))#f]
     [else #t]))
-    
 (define primeralinea '(1 2 3 4 5 6 0 8 9)) 
 ;(numberInListH 7 primeralinea)
+
+#|
+Parametros: lista(matriz sudoku) numero1 numero2(indice de columna)
+Descripcion: Comprueba si el numero1 se encuentra dentro de la columna numero2 de lista(sudoku)
+Retorno: true -> si el numero1 se encuentra en la columna numero2 
+|#
+
 (define (numberInListV sudoku number columna)
   (for*/first ([i 9]
               #:when [= number ( list-ref (list-ref sudoku i) columna)])    
@@ -55,7 +68,11 @@
 (define(listaConstruir3FilasDelMedio sudoku columna)(cond [(< columna 6) (cons (list-ref sudoku columna) (listaConstruir3FilasDelMedio sudoku (+ columna 1)) )]))
 (define(listaConstruir3UltimasFilas sudoku columna)(cond [(< columna 9) (cons (list-ref sudoku columna) (listaConstruir3UltimasFilas sudoku (+ columna 1)) )]))
 
-
+#|
+Parametros:
+Descripcion:
+Retorno:
+|#
 (define(construirCuadrante numeroCuadrante board)
   (cond
     [(= numeroCuadrante 1)(list (list-ref (car(listaConstruir3PrimerasFilas board 0))0)
@@ -149,6 +166,14 @@
                                 (list-ref (car(listaConstruir3UltimasFilas board 8))8))]
     )
   )
+
+
+
+#|
+Parametros: 
+Descripcion:
+Retorno:
+|#
 (define(numberInListC number sudoku posiciony posicionx)
   (cond
     [(> 3 posiciony)
@@ -174,56 +199,97 @@
    )
 )
 
-(define (pruebaC sudoku)
-  (for* ([i 9]
-         [j 9])
-    (for ([k 9])
-      (fprintf (current-output-port)"eje y: ~a eje x: ~a numero a comprobar: ~a :~a "i j k (numberInListC k sudoku i j))
-      (writeln""))))
-;(numberInListC 8 board 3 0)
-;(construirCuadrante 5 board)
-;(listaConstruir3FilasDelMedio board 3)
-;(listaConstruir3UltimasFilas board 6)
-;(construirPrimerCuadrante board)
-;(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
-(define (firstZeroRow lista)
-  (for/first ([i 9]
-    #:when [= (list-ref lista i) 0]) i))
-
-
+#|
+Parametros: lista(matriz sudoku)
+Descripcion: Recorre el sudoku posicion a posicion hasta que se encuentra un 0
+Retorno: lista del formato -> fila, columna
+|#
 (define (firstZero sudoku)
   (for*/first ([i 9]
                [j 9]
                #:when (= (list-ref (list-ref sudoku i)j)0))(list i j)))
 
 
+#|
+Parametros: numero lista(fila,columna) lista(matriz sudoku)
+Descripcion: dado un numero comprueba si es posible colocarlo en la posicion dada del sudoku dado (siguiendo las reglas del sudoku)
+Retorno: true -> el numero no esta ni en fila ni en columna ni en cuadrante de la posicion
+         false -> el numero no cumple la condicion anterior y no es valido en esa posicionn
+|#
 (define (numeroValido? numero posicion sudoku)
   (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (car posicion)(cadr posicion))))
 ;---------------------------------------------------------------
 ;------------------------------------------------------------
 
+
+#|
+Parametros: numero lista(posicion) lista(matriz sudoku)
+Descripcion: Reemplaza cero encontrado en la lista posicion por el numero dado
+Retorno: lista (matriz sudoku)
+|#
 (define (reemplazarCero numero posicion sudoku)
   (reemplazarElementoLista (reemplazarElementoLista numero (cadr posicion) (list-ref sudoku (car posicion)))(car posicion)sudoku))
 
+
+#|
+Parametros: elemento indice lista
+Descripcion: reemplaza el elemento que se encuentra en el indice de lista con el elemento dado
+Retorno: lista
+|#
 (define (reemplazarElementoLista elemento indice lista)
   (cond
     [(equal? 0 indice) (cons elemento (cdr lista))]
     [else (cons (car lista)(reemplazarElementoLista elemento (- indice 1) (cdr lista)))]))
-
+#|
+Parametros: elemento pila
+Descripcion: añade el elemento a la cima de la pila
+Retorno: void
+|#
 
 (define (push elemento pila)
   (cons elemento pila))
+
+
+#|
+Parametros: pila
+Descripcion: saca la cima de la pila
+Retorno: elemento en la cima de la pila
+|#
 (define (pop pila)(car pila))
 
+
+#|
+Parametros: elemento cola
+Descripcion: añade elemento al final de cola
+Retorno: void
+|#
 (define (encolar elemento cola)
   (cons elemento cola))
 
+
+#|
+Parametros: cola
+Descripcion: obtiene el primero de la cola
+Retorno: elemento al principio de la cola
+|#
 (define (obtenerPrimeroCola cola)
   (last cola))
 
+
+#|
+Parametros: cola
+Descripcion: desencola el elemento primero de la cola
+Retorno: cola 
+|#
 (define (desencolar cola)
   (reverse(cdr (reverse cola))))
 
+
+#|
+Parametros: numero lista(posicion) lista(matriz sudoku) lista(vacia)
+Descripcion: añade a la lista vacía dada los numero que pueden insertarse en una posicion con cero dentro de sudoku
+Retorno: lista
+|#
 (define (getOperacionesValidas iteracion posicion sudoku lista)
   (cond
     [(equal? 0 iteracion) lista]
@@ -231,28 +297,46 @@
     [else (getOperacionesValidas (- iteracion 1) posicion sudoku lista)]))
 
 
+
+#|
+Parametros: lista(numerosValidos) lista(posicion) lista(matriz sudooku) pila 
+Descripcion: dada una lista de numeros validos, genera nuevos sudokus sustituyendo el primer cero por cada uno de los numeros de la lista y apilandolos uno encima de otro
+Retorno: pila de sucesores
+|#
 (define (apilarSucesores numerosValidos posicion sudoku pila)
   (cond
     [(empty? numerosValidos)pila]
     [else (apilarSucesores (cdr numerosValidos) posicion sudoku (push(reemplazarCero (car numerosValidos)posicion sudoku) pila))]))
 
+
+#|
+Parametros: lista(numerosValidos) lista(posicion) lista(matriz sudoku) cola
+Descripcion: dada una lista de numeros validos, genera nuevos sudokus sustituyendo el primer cero por cada uno de los numeros de la lista y encolando uno detras de otro
+Retorno: cola de sucesores
+|#
 (define (encolarSucesores numerosValidos posicion sudoku cola)
   (cond
     [(empty? numerosValidos)cola]
     [else (encolarSucesores (cdr numerosValidos) posicion sudoku (encolar(reemplazarCero(car numerosValidos)posicion sudoku) cola))]))
 
 
+
+#|
+Parametros: lista(matriz sudoku)
+Descripcion: comprueba si el sudoku dado es un estado meta o no
+Retorno: true -> si sudoku estado meta
+         false -> si sudoku no es estado meta
+|#
 (define (goalTest sudoku)
   (cond
     [(list? (firstZero sudoku)) #f]
     [else #t]))
 
-
-
-
-;-------------------------------
-;-------------------------------
-
+#|
+Parametros:
+Descripcion:
+Retorno:
+|#
 (define (visualizar3Filas sudoku)
   (for*
       [(i 4)(j 24)]
@@ -276,14 +360,30 @@
     
   )
 )
+
+
+#|
+Parametros:
+Descripcion:
+Retorno:
+|#
 (define (visualizarSudoku sudoku)
   (display "-------+-------+-------\n")
   (visualizar3Filas (listaConstruir3PrimerasFilas sudoku 0))
   (visualizar3Filas (listaConstruir3FilasDelMedio sudoku 3))
   (visualizar3Filas (listaConstruir3UltimasFilas sudoku 6))
   )
-(visualizarSudoku board)
 
+
+#|
+Parametros: lista (matriz sudoku inicial) lista (matriz sudoku actual) lista booleano
+
+Descripcion: aplicando el algoritmo de busqueda en profundidad y gracias a una lista de abiertos y la recursividad de la funcion,
+explora un arbol de estados hasta encontrar, si es que tiene, la solucon del sudoku inicial dado, ademas mediante un booleano se puede indicar si
+se quiere obtener solamente la solucion o la secuencia de pasos que llevan a ella
+
+Retorno: se visualiza en pantalla o bien el sudoku solucion o la secuencia de pasos a la solucion
+|#
 (define (resolverSudokuDFS sudokuInicial sudoku abiertos backtracking)
   (cond
     [(goalTest sudoku)(if backtracking (pasosSolucion sudokuInicial sudoku)(visualizarSudoku sudoku))]
@@ -291,6 +391,16 @@
                           (cdr(apilarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))backtracking)]))
 
 
+
+#|
+Parametros: lista (matriz sudoku inicial) lista (matriz sudoku actual) lista booleano
+
+Descripcion: aplicando el algoritmo de busqueda en anchura y gracias a una lista de abiertos y la recursividad de la funcion,
+explora un arbol de estados hasta encontrar, si es que tiene, la solucon del sudoku inicial dado, ademas mediante un booleano se puede indicar si
+se quiere obtener solamente la solucion o la secuencia de pasos que llevan a ella
+
+Retorno: se visualiza en pantalla o bien el sudoku solucion o la secuencia de pasos a la solucion
+|#
 (define (resolverSudokuBFS sudokuInicial sudoku abiertos backtracking)
   (cond
     [(goalTest sudoku)(if backtracking (pasosSolucion sudokuInicial sudoku)(visualizarSudoku sudoku))]
