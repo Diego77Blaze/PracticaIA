@@ -406,50 +406,28 @@ Retorno: se visualiza en pantalla o bien el sudoku solucion o la secuencia de pa
     [(goalTest sudoku)(if backtracking (pasosSolucion sudokuInicial sudoku)(visualizarSudoku sudoku))]
     [else (resolverSudokuBFS sudokuInicial(obtenerPrimeroCola(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))
                              (desencolar(encolarSucesores (getOperacionesValidas 9(firstZero sudoku)sudoku '())(firstZero sudoku)sudoku abiertos))backtracking)]))
-;---------------------------------------------------------------
-;------------------------------------------------------------
-(define prueba                   
-  '((3 9 4 0 0 2 6 7 0)
-    (0 0 0 3 0 0 4 0 0)
-    (5 0 0 6 9 0 0 2 0)
-    (0 4 5 0 0 0 9 0 0)
-    (6 0 0 0 0 0 0 0 7)
-    (0 0 7 0 0 0 5 8 0)
-    (0 1 0 0 6 7 0 0 8)
-    (0 0 9 0 0 8 0 0 0)
-    (0 2 6 4 0 0 7 3 5)))
 
-(define solprueba                   
-  '((9 4 7 8 5 3 1 6 2)
-    (3 1 5 6 4 2 9 7 8)
-    (2 6 8 1 7 9 5 4 3)
-    (7 5 1 4 3 6 8 2 9)
-    (6 9 2 5 1 8 4 3 7)
-    (4 8 3 9 2 7 6 1 5)
-    (5 7 4 3 9 1 2 8 6)
-    (1 3 6 2 8 5 7 9 4)
-    (8 2 9 7 6 4 3 5 1)))
 
+
+#|
+Parametros: lista (matriz sudoku inicial) lista (matriz sudoku actual)
+
+Descripcion: crea uno de los pasos dados para recrear el procedimiento de solución
+
+Retorno: sudoku (lista de 9 listas)
+|#
 (define (backtracking sudInicial sudFinal)
   (reemplazarElementoLista (reemplazarElementoLista (list-ref (list-ref sudFinal (car(firstZero sudInicial))) (cadr(firstZero sudInicial))) (cadr(firstZero sudInicial)) (list-ref sudInicial (car(firstZero sudInicial)))) (car(firstZero sudInicial)) sudInicial)
   )
 
-#|(define (backtracking sudInicial sudFinal)
-  (cond
-    [(equal? #f (firstZero sudInicial))]
-    [else (reemplazarElementoLista (reemplazarElementoLista (list-ref (list-ref sudFinal (car(firstZero sudInicial))) (cadr(firstZero sudInicial))) (cadr(firstZero sudInicial)) (list-ref sudInicial (car(firstZero sudInicial)))) (car(firstZero sudInicial)) sudInicial)] 
-    ))
 
-(define (pasosSolucion sudInicial sudFinal)
-  (cond
-    [(equal? #f (equal? sudInicial sudFinal))
-     (visualizarSudoku (backtracking sudInicial sudFinal))
-     (display "\n")
-     (pasosSolucion (backtracking sudInicial sudFinal) sudFinal)]
-    )
-  )
+#|
+Parametros: lista (matriz sudoku inicial) lista (matriz sudoku actual)
+
+Descripcion: imprime por pantalla todos los pasos que se han seguido para alcanzar la solución del sudoku
+
+Retorno:se visualiza en pantalla la secuencia de pasos solución
 |#
-
 (define (pasosSolucion sudInicial sudFinal)
   (cond
     [(equal? #f (equal? sudInicial sudFinal))
