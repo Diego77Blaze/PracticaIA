@@ -69,9 +69,9 @@ Retorno: true -> si el numero1 se encuentra en la columna numero2
 (define(listaConstruir3UltimasFilas sudoku columna)(cond [(< columna 9) (cons (list-ref sudoku columna) (listaConstruir3UltimasFilas sudoku (+ columna 1)) )]))
 
 #|
-Parametros:
-Descripcion:
-Retorno:
+Parametros:numeroCuadrante(entero) lista(matriz board)
+Descripcion:Forma los cuadrantes del sudoku
+Retorno:lista(cuadrante)
 |#
 (define(construirCuadrante numeroCuadrante board)
   (cond
@@ -170,9 +170,10 @@ Retorno:
 
 
 #|
-Parametros: 
-Descripcion:
-Retorno:
+Parametros:number lista(matriz sudoku) posiciony posicionx
+Descripcion:busca el numero introducido en el cuadrante que corresponda segun las coordenadas pasadas.
+Retorno:#f->si encuentra el numero introducido en el cuadrante selecionado
+        #t->si no encuentra el numero en el cuadrante.
 |#
 (define(numberInListC number sudoku posiciony posicionx)
   (cond
@@ -333,9 +334,8 @@ Retorno: true -> si sudoku estado meta
     [else #t]))
 
 #|
-Parametros:
-Descripcion:
-Retorno:
+Parametros:lista(matriz filas sudoku)
+Descripcion:muestra las 3 filas introducidas
 |#
 (define (visualizar3Filas sudoku)
   (for*
@@ -363,9 +363,8 @@ Retorno:
 
 
 #|
-Parametros:
-Descripcion:
-Retorno:
+Parametros:lista (matriz sudoku)
+Descripcion:muestra por pantalla el sudoku introducido
 |#
 (define (visualizarSudoku sudoku)
   (display "-------+-------+-------\n")
@@ -666,7 +665,7 @@ Retorno:se visualiza en pantalla la secuencia de pasos solución
     (0 0 0 0 9 3 0 0 6)))
 
 
-
+(provide (all-defined-out))
 
 
 
