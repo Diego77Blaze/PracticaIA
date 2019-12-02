@@ -441,25 +441,255 @@ Retorno:se visualiza en pantalla la secuencia de pasos solución
   )
 
 (define (menuInicial)
-  (begin
-    (display "- - - - - - - - - - RESOLVEDOR DE SUDOKUS - - - - - - - - - -\n")
-    (display "¿Desea que se muestren todos los pasos hasta llegar a la solución? S/N\n")
-    (define backtr (read-line (current-input-port) 'any))
-    (display "¿Desea resolverlo mediante el algoritmo de DFS (búsqueda en profundidad) o el algoritmo de BFS (búsqueda en anchura)? DFS/BFS \n")
-    (define metodo (read-line (current-input-port) 'any))
-    (display "¿Qué sudoku desea resolver del 1 al 20? Ej: test1, test2, test3... test20\n")
-    (define numSudoku (read-line (current-input-port) 'any))
-    (cond
-      [(equal? "S" backtr)(cond
-                            [(equal? "DFS" metodo)(resolverSudokuDFS numSudoku numSudoku '() #t)]
-                            [(equal? "BFS" metodo)(resolverSudokuBFS numSudoku numSudoku '() #t)]
-                            [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
-      [(equal? "N" backtr)(cond
-                            [(equal? "DFS" metodo)(resolverSudokuDFS numSudoku numSudoku '() #f)]
-                            [(equal? "BFS" metodo)(resolverSudokuBFS numSudoku numSudoku '() #f)]
-                            [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
-      [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
-      )  
+  (display "- - - - - - - - - - RESOLVEDOR DE SUDOKUS - - - - - - - - - -\n")
+  (display "¿Desea que se muestren todos los pasos hasta llegar a la solución? S/N\n")
+  (define backtr (read-line (current-input-port) 'any))
+  (display "¿Desea resolverlo mediante el algoritmo de DFS (búsqueda en profundidad) o el algoritmo de BFS (búsqueda en anchura)? DFS/BFS \n")
+  (define metodo (read-line (current-input-port) 'any))
+  (display "¿Qué sudoku desea resolver del 1 al 20? Ej: 1, 2, 3... 20\n")
+  (define numSudoku (string->number (read-line (current-input-port) 'any)))
+  (cond
+    [(equal? numSudoku 1)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test1 test1 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test1 test1 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test1 test1 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test1 test1 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 2)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test2 test2 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test2 test2 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test2 test2 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test2 test2 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 3)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test3 test3 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test3 test3 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test3 test3 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test3 test3 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 4)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test4 test4 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test4 test4 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test4 test4 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test4 test4 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 5)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test5 test5 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test5 test5 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test5 test5 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test5 test5 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 6)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test6 test6 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test6 test6 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test6 test6 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test6 test6 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 7)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test7 test7 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test7 test7 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test7 test7 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test7 test7 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 8)((cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test8 test8 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test8 test8 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test8 test8 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test8 test8 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          )]
+    [(equal? numSudoku 9)(cond
+                           [(equal? "S" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test9 test9 '() #t)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test9 test9 '() #t)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [(equal? "N" backtr)(cond
+                                                 [(equal? "DFS" metodo)(resolverSudokuDFS test9 test9 '() #f)]
+                                                 [(equal? "BFS" metodo)(resolverSudokuBFS test9 test9 '() #f)]
+                                                 [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                           [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                           ) 
+                         ]
+    [(equal? numSudoku 10)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test10 test10 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test10 test10 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test10 test10 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test10 test10 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 11)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test11 test11 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test11 test11 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test11 test11 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test11 test11 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 12)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test12 test12 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test12 test12 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test12 test12 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test12 test12 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 13)((cond
+                             [(equal? "S" backtr)(cond
+                                                   [(equal? "DFS" metodo)(resolverSudokuDFS test13 test13 '() #t)]
+                                                   [(equal? "BFS" metodo)(resolverSudokuBFS test13 test13 '() #t)]
+                                                   [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                             [(equal? "N" backtr)(cond
+                                                   [(equal? "DFS" metodo)(resolverSudokuDFS numSudoku numSudoku '() #f)]
+                                                   [(equal? "BFS" metodo)(resolverSudokuBFS numSudoku numSudoku '() #f)]
+                                                   [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                             [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                             ) 
+                           )]
+    [(equal? numSudoku 14)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test14 test14 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test14 test14 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test14 test14 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test14 test14 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 15)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test15 test15 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test15 test15 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test15 test15 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test15 test15 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 16)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test16 test16 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test16 test16 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test16 test16 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test16 test16 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 17)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test17 test17 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test17 test17 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test17 test17 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test17 test17 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 18)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test18 test18 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test18 test18 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test18 test18 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test18 test18 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 19)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test19 test19 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test19 test19 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test19 test19 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test19 test19 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [(equal? numSudoku 20)(cond
+                            [(equal? "S" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test20 test20 '() #t)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test20 test20 '() #t)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [(equal? "N" backtr)(cond
+                                                  [(equal? "DFS" metodo)(resolverSudokuDFS test20 test20 '() #f)]
+                                                  [(equal? "BFS" metodo)(resolverSudokuBFS test20 test20 '() #f)]
+                                                  [else (display "Error: Especifique correctamente el método de búsqueda--> DFS/BFS")])]
+                            [else (display "Error: Elija correctamente la opción del backtracking--> S/N")]
+                            ) 
+                          ]
+    [else (display "Error: Especifique correctamente el sudoku del 1 al 20--> 1, 2, 3... 20")]
     ))
 
 
@@ -472,7 +702,7 @@ Retorno:se visualiza en pantalla la secuencia de pasos solución
     (0 1 9 7 4 0 3 0 0)
     (6 0 0 0 9 4 0 0 2)
     (8 0 1 0 0 6 7 5 0)
-    (0 0 9 5 0 0 0 0 4)))
+    (0 0 0 0 0 0 0 0 4)))
 (define test2
   '((5 6 0 0 0 4 1 0 0) 
     (0 7 0 6 0 0 0 3 0) 
