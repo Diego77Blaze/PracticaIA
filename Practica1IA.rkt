@@ -1,38 +1,4 @@
 #lang racket
-(define sudoku'((1 2 3 4 5 6 7 8 9)
-                (4 5 6 1 2 3 9 7 8)
-                (7 8 9 3 1 2 4 5 6)
-                (4 5 6 1 2 3 7 8 9)))
-(define board                   
-  '((5 0 0 0 0 0 0 0 0)
-    (0 2 8 4 0 0 5 0 3)
-    (1 0 0 2 7 0 0 0 6)
-    (0 0 3 0 5 2 1 9 0)
-    (7 0 6 0 1 0 2 0 8)
-    (0 1 9 7 4 0 3 0 0)
-    (6 0 0 0 9 4 0 0 2)
-    (8 0 1 0 0 6 7 5 0)
-    (0 0 0 0 0 0 0 0 4)))
-
-;(list-ref '(a b c) 2) 
-(define (printLista lista)
-(for* ([i 9]
-       [j 9])
-  (cond
-    ([= j 0](display "|")(write (list-ref (list-ref lista i) j)))
-    ([= j 8](write (list-ref (list-ref lista i) j))(display "|\n"))
-    (else (write (list-ref (list-ref lista i) j)))))
-)
-
-(define (sudokucorrecto sudoku)
-  (for*/first ([i 4]
-              [j 9]
-              #:when [(numberInListH sudoku( list-ref (list-ref sudoku i) j) (cdr(member ( list-ref (list-ref sudoku i) j) (list-ref sudoku i))) ) ]
-              )
-    (write i)
-    )
-  )
-
 
 #|
 Parametros: numero lista(fila de sudoku)
@@ -42,11 +8,8 @@ Retorno: true -> numero esta en lista
 |#
 (define (numberInListH number fila)
   (cond
-    ;[(equal? empty fila)(#t)]
     [(equal? #f (member number fila))#f]
     [else #t]))
-(define primeralinea '(1 2 3 4 5 6 0 8 9)) 
-;(numberInListH 7 primeralinea)
 
 #|
 Parametros: lista(matriz sudoku) numero1 numero2(indice de columna)
@@ -61,8 +24,6 @@ Retorno: true -> si el numero1 se encuentra en la columna numero2
       )
 
  )
-;(numberInListV board 8 8)
-
 
 (define(listaConstruir3PrimerasFilas sudoku columna)(cond [(< columna 3) (cons (list-ref sudoku columna) (listaConstruir3PrimerasFilas sudoku (+ columna 1)) )]))
 (define(listaConstruir3FilasDelMedio sudoku columna)(cond [(< columna 6) (cons (list-ref sudoku columna) (listaConstruir3FilasDelMedio sudoku (+ columna 1)) )]))
@@ -219,8 +180,6 @@ Retorno: true -> el numero no esta ni en fila ni en columna ni en cuadrante de l
 |#
 (define (numeroValido? numero posicion sudoku)
   (nor (numberInListH numero (list-ref sudoku(car posicion)))(numberInListV sudoku numero (cadr posicion))(numberInListC numero sudoku (car posicion)(cadr posicion))))
-;---------------------------------------------------------------
-;------------------------------------------------------------
 
 
 #|
