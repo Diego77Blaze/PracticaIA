@@ -693,6 +693,23 @@ Retorno:se visualiza en pantalla la secuencia de pasos solución
     [else (display "Error: Especifique correctamente el sudoku del 1 al 20--> 1, 2, 3... 20")]
     ))
 
+#|
+Parametros: lista (matriz sudoku)
+
+Descripcion:comprueba si los valores del sudoku estan entre 1 y 9 y que el sudoku no tiene valores repetidos en la misma linea columna o cuadrante
+
+Retorno:si ha encontrado algun error en el sudoku retorna #t y si no retorna #f
+|#
+(define (compruebaSudoku sudoku)
+  (for*/first ([i 9]
+               [j 9]
+               #:when [or  (< 9 (list-ref(list-ref sudoku i) j)) (> 0 (list-ref(list-ref sudoku i) j)) (and(not(= 0 (list-ref(list-ref sudoku i) j))) (or (numberInListH (list-ref(list-ref sudoku i) j) (list-ref (reemplazarCero 0 (list i j) sudoku) i))
+                                                                           (numberInListV (reemplazarCero 0 (list i j) sudoku)  (list-ref(list-ref sudoku i) j) j)
+                                                                           (numberInListC (list-ref(list-ref sudoku i) j) (reemplazarCero 0 (list i j) sudoku) i j)
+                                                                           ))]) 
+    #f #t
+    ))
+
 
 (define test1
   '((5 0 0 0 0 0 0 0 0)
@@ -900,21 +917,6 @@ Retorno:se visualiza en pantalla la secuencia de pasos solución
 
 (menuInicial)
 
-#|
-Parametros: lista (matriz sudoku)
 
-Descripcion:comprueba si los valores del sudoku estan entre 1 y 9 y que el sudoku no tiene valores repetidos en la misma linea columna o cuadrante
-
-Retorno:si ha encontrado algun error en el sudoku retorna #t y si no retorna #f
-|#
-(define (compruebaSudoku sudoku)
-  (for*/first ([i 9]
-               [j 9]
-               #:when [or  (< 9 (list-ref(list-ref sudoku i) j)) (> 0 (list-ref(list-ref sudoku i) j)) (and(not(= 0 (list-ref(list-ref sudoku i) j))) (or (numberInListH (list-ref(list-ref sudoku i) j) (list-ref (reemplazarCero 0 (list i j) sudoku) i))
-                                                                           (numberInListV (reemplazarCero 0 (list i j) sudoku)  (list-ref(list-ref sudoku i) j) j)
-                                                                           (numberInListC (list-ref(list-ref sudoku i) j) (reemplazarCero 0 (list i j) sudoku) i j)
-                                                                           ))]) 
-    #f #t
-    ))
 
 
