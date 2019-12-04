@@ -896,6 +896,6 @@ Retorno:se visualiza en pantalla la secuencia de pasos solución
 
 
 (provide (all-defined-out))
-
+(menuInicial)
 
 
